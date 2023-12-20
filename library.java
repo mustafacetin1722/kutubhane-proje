@@ -81,7 +81,7 @@ public class library {
 
 
 
-git 
+
     public static void viewAvailableBooks(){
         for (int i=0; i<kitapSayisi; i++){
             System.out.println("Başlık: " + baslik[i] +
