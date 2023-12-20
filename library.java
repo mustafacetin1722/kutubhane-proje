@@ -8,11 +8,11 @@ public class library {
     public static String[] yazar=new String[MAX_ITEMS];
     public static String[] isbn=new String[MAX_ITEMS];
     public static int[] miktar=new int[MAX_ITEMS];
-
-
-
-
+    public static String[] patronAdi=new String[MAX_ITEMS];
     public static int kitapSayisi=0;
+
+
+
     public static void addBook(String kitapBaslik,String kitapYazar,String kitapISBN,int kitapMiktar){
         baslik[kitapSayisi]=kitapBaslik;
         yazar[kitapSayisi]=kitapYazar;
@@ -25,47 +25,41 @@ public class library {
 
 
 
-    public static String[] patronAdi=new String[MAX_ITEMS];
-    public static int kitapBul(String ISBN){
-        for (int i=0; i<kitapSayisi; i++){
-            if (isbn[i].equals(ISBN)){
-                return i;
-            }
-        }
-        return -1;
-    }
-    // BURADA ÇOK HATA ALDIM
+
     public static void checkOutBook(String ISBN,String patron,int kitapMiktari){
-        if (kitapBul(ISBN) !=-1){
-            if ( miktar[kitapBul(ISBN)]>=kitapMiktari){
-                miktar[kitapBul(ISBN)]-=kitapMiktari;
-                patronAdi[kitapBul(ISBN)]=patron;
-                System.out.println("Patron : "+patron);
-                System.out.println("Alınan Kitap : "+kitapMiktari);
-            }
-            else {
-                System.out.println("Yetersiz kitap miktarı veya geçersiz işlem.");
-            }
-        }
+       for (int i=0; i<kitapSayisi; i++){
+           if (isbn[i].equals(ISBN)){
+               if ( miktar[i]>=kitapMiktari){
+                   miktar[i]-=kitapMiktari;
+                   patronAdi[i]=patron;
+                   System.out.println("Patron : "+patron);
+                   System.out.println("Alınan Kitap : "+kitapMiktari);
+               }
+               else {
+                   System.out.println("Yetersiz kitap miktarı veya geçersiz işlem.");
+               }
+           }
         else {
                 System.out.println("Geçersiz işlem.");
             }
         }
+    }
 
 
 
 
 
     public static void returnBook(String ISBN,String patron,int kitapIadeMiktari){
-        if (kitapBul(ISBN) !=-1){
-            miktar[kitapBul(ISBN)]+=kitapIadeMiktari;
-            System.out.println(kitapIadeMiktari+" kitap iade edildi.");
-            System.out.println("Kullanıcı : "+patron);
-
-        }
+        for (int i=0; i<kitapSayisi; i++){
+            if (isbn[i].equals(ISBN)){
+                miktar[i]+=kitapIadeMiktari;
+                System.out.println(kitapIadeMiktari+" kitap iade edildi.");
+                System.out.println("Kullanıcı : "+patron);
+            }
         else {
             System.out.println("Kitap bulunmamaktadır.");
         }
+    }
     }
 
 
@@ -84,6 +78,10 @@ public class library {
         System.out.println("Toplam kitap sayısı : ");*/
     }
 
+
+
+
+    
     public static void viewAvailableBooks(){
         for (int i=0; i<kitapSayisi; i++){
             System.out.println("Başlık: " + baslik[i] +
